@@ -22,10 +22,8 @@ int main()
             if(!isFind && fib[i] > dec) {
                 continue;
             }
-
             isFind = true;
             if(fib[i] > dec) {
-
                 cout << "0";
             }
             else {
