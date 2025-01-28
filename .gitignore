@@ -1,6 +1,7 @@
 *.idea
 *.out
 *.exe
+*.txt
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
