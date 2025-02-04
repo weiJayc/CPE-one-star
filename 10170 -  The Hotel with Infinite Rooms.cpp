@@ -11,9 +11,9 @@ int main()
     }
 
     // 為了紀念我嘗試半天逝去的光陰，我把之前的vector留在這裡...
-    // vector<long long> daysTheyCome(10000);
+    // vector<long long> daysTheyCome(44721362); // global
     // long long totalDay = 1;
-    // for (int i = 1; i <= 10000; i++) {
+    // for (int i = 1; i <= 44721361; i++) {
     //     daysTheyCome[i] += totalDay;
     //     totalDay += i;
     // }
