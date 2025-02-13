@@ -1,20 +1,13 @@
 #include <iostream>
-#include <sstream>
 using namespace std;
 int main()
 {
     int t;
     cin >> t;
     for(int cases = 1; cases <= t; cases++) {
-        cin.ignore();
-        string input;
-        getline(cin, input);
-        
         int n;
-        stringstream ss(input);
         string temp;
-        ss >> temp >> temp >> n;
-
+        cin >> temp >> temp >> n;
         long long arr[105][105] = {};
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
