@@ -34,7 +34,7 @@ bool expand(vector< vector<char> >& board, vector< vector<bool> >& visited, queu
     }
     pointQueue = nextQueue;
     return true;
-}
+} 
 int largestSquares(int x, int y, vector< vector<char> >& board) {
     int n = board.size(), m = board[0].size();
     vector< vector<bool> > visited(n, vector<bool>(m, false));
