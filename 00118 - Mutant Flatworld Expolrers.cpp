@@ -4,22 +4,19 @@
 #include <algorithm>
 using namespace std;
 
+vector< pair<int, int> > directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+map<char, int> dir_to_num = {{'N', 0}, {'E', 1}, {'S', 2}, {'W', 3}};
+map<int, char> num_to_dir = {{0, 'N'}, {1, 'E'}, {2, 'S'}, {3, 'W'}};
+
 class Robot {
     private:
-        vector< pair<int, int> > directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-        map<char, int> dir_to_num = {{'N', 0}, {'E', 1}, {'S', 2}, {'W', 3}};
-        map<int, char> num_to_dir = {{0, 'N'}, {1, 'E'}, {2, 'S'}, {3, 'W'}};
-        static multimap< pair<int, int>, int > scent;
+        static vector< vector<bool> > scent;
         int x, y, dir;
         int rows, cols;
 
     public:
-        Robot(int x, int y, char dir, int n, int m) {
-            this -> x = x;
-            this -> y = y;
+        Robot(int x, int y, char dir, int n, int m) : x(x), y(y), rows(n), cols(m) {    
             this -> dir = dir_to_num[dir];
-            rows = n;
-            cols = m;
         }
         bool move(char c) {
             if(c == 'F') {
@@ -27,14 +24,10 @@ class Robot {
 
                 // out of range
                 if(nx < 0 || ny < 0 || nx > rows || ny > cols) {
-                    auto range = scent.equal_range({x, y});
-                    for(auto item = range.first; item != range.second; ++item) {
-                        return true
-                        if(item -> second == dir) {
-                            return true;
-                        }
+                    if(scent[x][y]) {
+                        return true;
                     }
-                    scent.insert({{x, y}, dir});
+                    scent[x][y] = true;
                     return false;
                 }
                 x = nx;
@@ -53,17 +46,16 @@ class Robot {
         char getDir() { return num_to_dir[dir]; }
 };
 
-multimap< pair<int, int>, int > Robot::scent;
+vector< vector<bool> > Robot::scent(55, vector<bool>(55, false));
 
-int main()
-{
+int main() {
     int n, m, posx, posy;
     char dir;
-    
+    string instructions;
+
     cin >> n >> m;
     while(cin >> posx >> posy >> dir) {
         Robot robot(posx, posy, dir, n, m);
-        string instructions;
         cin >> instructions;
 
         bool isLost = false;
@@ -73,11 +65,10 @@ int main()
                 break;
             }
         }
-        if(isLost) {
-            cout << robot.getX() << " " << robot.getY() << " " << robot.getDir() << " LOST" << endl;
-        }
-        else {
-            cout << robot.getX() << " " << robot.getY() << " " << robot.getDir() << endl;
-        }
+
+        cout << robot.getX() << " " << robot.getY() << " " << robot.getDir();
+        if(isLost) cout << " LOST";
+        cout << endl;
     }
+    return 0;
 }
